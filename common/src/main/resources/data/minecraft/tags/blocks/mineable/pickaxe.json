@@ -1,7 +1,4 @@
 {
   "replace": false,
-  "values": [
-    "hydrophobe:hydrophobe",
-    "hydrophobe:magmaphobe"
-  ]
+  "values": ["hydrophobe:hydrophobe", "hydrophobe:magmaphobe"]
 }
