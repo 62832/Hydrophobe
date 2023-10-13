@@ -1,0 +1,19 @@
+{
+  "type": "crafting_shaped",
+  "category": "misc",
+  "pattern": ["XEX", "E#E", "XEX"],
+  "key": {
+    "#": {
+      "tag": "minecraft:glass"
+    },
+    "E": {
+      "item": "minecraft:ender_pearl"
+    },
+    "X": {
+      "item": "minecraft:obsidian"
+    }
+  },
+  "result": {
+    "item": "hydrophobe:magmaphobe"
+  }
+}

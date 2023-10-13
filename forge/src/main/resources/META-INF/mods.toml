@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[$loaderVersion,)"
+license = "MIT"
+
+issueTrackerURL = "https://github.com/62832/Hydrophobe/issues"
+displayURL = "https://curseforge.com/minecraft/mc-mods/hydrophobe"
+
+[[mods]]
+modId = "hydrophobe"
+version = "$version"
+displayName = "Hydrophobe"
+logoFile = "icon.png"
+authors = "90"
+description = "An active water repellent."
+
+[[dependencies.hydrophobe]]
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[$minecraftVersion]"
+    ordering = "NONE"
+    side = "BOTH"
+
+[[dependencies.hydrophobe]]
+    modId = "cloth_config"
+    mandatory = true
+    versionRange = "*"
+    ordering = "AFTER"
+    side = "BOTH"

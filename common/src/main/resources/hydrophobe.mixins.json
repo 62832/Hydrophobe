@@ -1,0 +1,4 @@
+{
+  "package": "gripe._90.hydrophobe.mixin",
+  "mixins": ["FlowingFluidMixin"]
+}

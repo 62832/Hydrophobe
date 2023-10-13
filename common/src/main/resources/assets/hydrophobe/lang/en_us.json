@@ -1,0 +1,8 @@
+{
+  "block.hydrophobe.hydrophobe": "Hydrophobe",
+  "block.hydrophobe.magmaphobe": "Magmaphobe",
+
+  "text.autoconfig.hydrophobe.title": "Hydrophobe",
+  "text.autoconfig.hydrophobe.option.waterRange": "Hydrophobe Water Range",
+  "text.autoconfig.hydrophobe.option.lavaRange": "Magmaphobe Lava Range"
+}
