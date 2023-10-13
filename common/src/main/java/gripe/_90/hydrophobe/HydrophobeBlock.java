@@ -14,14 +14,14 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.Material;
 
 public class HydrophobeBlock extends Block {
     private final TagKey<Fluid> fluidTag;
     private final int fluidRange;
 
     HydrophobeBlock(TagKey<Fluid> fluidTag, int fluidRange) {
-        super(Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.2F, 11F));
+        super(Properties.of(Material.METAL).sound(SoundType.METAL).strength(2.2F, 11.0F));
         this.fluidTag = fluidTag;
         this.fluidRange = fluidRange;
     }
