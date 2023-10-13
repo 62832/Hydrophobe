@@ -40,7 +40,7 @@ subprojects {
     apply(plugin = rootProject.libs.plugins.spotless.get().pluginId)
 
     base.archivesName.set("$modId-${project.name}")
-    version = "$modVersion-$minecraftVersion"
+    version = modVersion
     group = property("mavenGroup").toString()
     
     val javaVersion: String by project
@@ -169,7 +169,7 @@ for (platform in property("enabledPlatforms").toString().split(',')) {
         tasks {
             processResources {
                 val commonProps by extra { mapOf(
-                        "version"           to project.version,
+                        "version"           to modVersion,
                         "minecraftVersion"  to minecraftVersion)
                 }
 

@@ -21,7 +21,7 @@ public class HydrophobeBlock extends Block {
     private final int fluidRange;
 
     HydrophobeBlock(TagKey<Fluid> fluidTag, int fluidRange) {
-        super(Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(4.0F));
+        super(Properties.of().mapColor(MapColor.METAL).sound(SoundType.METAL).strength(2.2F, 11F));
         this.fluidTag = fluidTag;
         this.fluidRange = fluidRange;
     }

@@ -20,14 +20,14 @@ public class FlowingFluidMixin {
     @Inject(method = "spread", at = @At("HEAD"), cancellable = true)
     private void suppressFlow(Level level, BlockPos pos, FluidState state, CallbackInfo ci) {
         if (state.is(FluidTags.WATER)) {
-            suppress(level, pos, state, ci, Hydrophobe.WATER_RANGE);
+            hydrophobe$suppress(level, pos, state, ci, Hydrophobe.WATER_RANGE);
         } else if (state.is(FluidTags.LAVA)) {
-            suppress(level, pos, state, ci, Hydrophobe.LAVA_RANGE);
+            hydrophobe$suppress(level, pos, state, ci, Hydrophobe.LAVA_RANGE);
         }
     }
 
     @Unique
-    private void suppress(Level level, BlockPos pos, FluidState state, CallbackInfo ci, int range) {
+    private void hydrophobe$suppress(Level level, BlockPos pos, FluidState state, CallbackInfo ci, int range) {
         var bound = range + 1;
         var p1 = pos.subtract(new Vec3i(bound, bound, bound));
         var p2 = pos.subtract(new Vec3i(-bound, -bound, -bound));
