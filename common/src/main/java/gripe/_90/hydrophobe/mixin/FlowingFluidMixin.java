@@ -5,7 +5,6 @@ import gripe._90.hydrophobe.HydrophobeBlock;
 import java.util.stream.Stream;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
@@ -19,10 +18,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class FlowingFluidMixin {
     @Inject(method = "spread", at = @At("HEAD"), cancellable = true)
     private void suppressFlow(Level level, BlockPos pos, FluidState state, CallbackInfo ci) {
-        if (state.is(FluidTags.WATER)) {
-            hydrophobe$suppress(level, pos, state, ci, Hydrophobe.WATER_RANGE);
-        } else if (state.is(FluidTags.LAVA)) {
-            hydrophobe$suppress(level, pos, state, ci, Hydrophobe.LAVA_RANGE);
+        if (state.is(Hydrophobe.HYDROPHOBE_TAG)) {
+            hydrophobe$suppress(level, pos, state, ci, Hydrophobe.HYDROPHOBE_RANGE);
+        } else if (state.is(Hydrophobe.MAGMAPHOBE_TAG)) {
+            hydrophobe$suppress(level, pos, state, ci, Hydrophobe.MAGMAPHOBE_RANGE);
         }
     }
 

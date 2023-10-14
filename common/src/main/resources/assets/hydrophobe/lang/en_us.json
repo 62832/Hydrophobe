@@ -3,6 +3,6 @@
   "block.hydrophobe.magmaphobe": "Magmaphobe",
 
   "text.autoconfig.hydrophobe.title": "Hydrophobe",
-  "text.autoconfig.hydrophobe.option.waterRange": "Hydrophobe Water Range",
-  "text.autoconfig.hydrophobe.option.lavaRange": "Magmaphobe Lava Range"
+  "text.autoconfig.hydrophobe.option.hydrophobeRange": "Hydrophobe Range",
+  "text.autoconfig.hydrophobe.option.magmaphobeRange": "Magmaphobe Range"
 }

@@ -13,11 +13,11 @@ public class HydrophobeConfig implements ConfigData {
 
     @ConfigEntry.BoundedDiscrete(min = 1, max = 8)
     @ConfigEntry.Gui.RequiresRestart
-    int waterRange = 3;
+    int hydrophobeRange = 3;
 
     @ConfigEntry.BoundedDiscrete(min = 1, max = 8)
     @ConfigEntry.Gui.RequiresRestart
-    int lavaRange = 1;
+    int magmaphobeRange = 1;
 
     public static void load() {
         if (INSTANCE != null) {
