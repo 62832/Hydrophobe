@@ -1,7 +1,6 @@
 package gripe._90.hydrophobe;
 
 import java.util.function.Function;
-
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -21,12 +20,14 @@ public class Hydrophobe {
     private static final Item.Properties ITEM_PROPS = new Item.Properties().tab(CreativeModeTab.TAB_MISC);
 
     public static final ResourceLocation HYDROPHOBE_ID = ID.apply("hydrophobe");
-    public static final TagKey<Fluid> HYDROPHOBE_TAG = TagKey.create(Registry.FLUID_REGISTRY, ID.apply("hydrophobe_affected"));
+    public static final TagKey<Fluid> HYDROPHOBE_TAG =
+            TagKey.create(Registry.FLUID_REGISTRY, ID.apply("hydrophobe_affected"));
     public static final Block HYDROPHOBE = new HydrophobeBlock(HYDROPHOBE_TAG, HYDROPHOBE_RANGE);
     public static final Item HYDROPHOBE_ITEM = new BlockItem(HYDROPHOBE, ITEM_PROPS);
 
     public static final ResourceLocation MAGMAPHOBE_ID = ID.apply("magmaphobe");
-    public static final TagKey<Fluid> MAGMAPHOBE_TAG = TagKey.create(Registry.FLUID_REGISTRY, ID.apply("magmaphobe_affected"));
+    public static final TagKey<Fluid> MAGMAPHOBE_TAG =
+            TagKey.create(Registry.FLUID_REGISTRY, ID.apply("magmaphobe_affected"));
     public static final Block MAGMAPHOBE = new HydrophobeBlock(MAGMAPHOBE_TAG, MAGMAPHOBE_RANGE);
     public static final Item MAGMAPHOBE_ITEM = new BlockItem(MAGMAPHOBE, ITEM_PROPS);
 }
