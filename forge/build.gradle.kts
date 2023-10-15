@@ -1,3 +1,9 @@
+loom {
+    forge {
+        mixinConfig("${project.property("modId")}.mixins.json")
+    }
+}
+
 dependencies {
     forge(libs.forge)
     modImplementation(libs.cloth.forge)
