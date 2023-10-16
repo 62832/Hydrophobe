@@ -3,10 +3,9 @@ package gripe._90.hydrophobe;
 import java.util.stream.Stream;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
-import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.TagKey;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BucketPickup;
@@ -33,13 +32,6 @@ public class HydrophobeBlock extends Block {
     @Override
     public void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean notify) {
         clearFluid(level, pos);
-        level.scheduleTick(pos, this, 5);
-    }
-
-    @Override
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        clearFluid(level, pos);
-        level.scheduleTick(pos, this, 5);
     }
 
     @Override
@@ -57,7 +49,7 @@ public class HydrophobeBlock extends Block {
                 .forEach(p -> level.getBlockState(p).neighborChanged(level, p, this, pos, false));
     }
 
-    private void clearFluid(Level level, BlockPos pos) {
+    public void clearFluid(LevelAccessor level, BlockPos pos) {
         if (level.isClientSide()) return;
 
         var p1 = pos.subtract(new Vec3i(fluidRange, fluidRange, fluidRange));
