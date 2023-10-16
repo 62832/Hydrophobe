@@ -2,7 +2,6 @@ package gripe._90.hydrophobe.mixin;
 
 import gripe._90.hydrophobe.Hydrophobe;
 import gripe._90.hydrophobe.HydrophobeBlock;
-import java.util.stream.Stream;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
@@ -38,16 +37,14 @@ public class FlowingFluidMixin {
         var p1 = pos.subtract(new Vec3i(range, range, range));
         var p2 = pos.subtract(new Vec3i(-range, -range, -range));
 
-        BlockPos.betweenClosedStream(p1, p2)
-                .filter(p -> Stream.of(pos.getX() - p.getX(), pos.getY() - p.getY(), pos.getZ() - p.getZ())
-                        .map(Math::abs)
-                        .anyMatch(i -> i == range))
-                .forEach(p -> {
-                    if (level.getBlockState(p).getBlock() instanceof HydrophobeBlock hydrophobe) {
-                        if (state.is(hydrophobe.getFluidTag())) {
-                            ci.cancel();
-                        }
-                    }
-                });
+        for (var p : BlockPos.betweenClosed(p1, p2)) {
+            if (level.getBlockState(p).getBlock() instanceof HydrophobeBlock hydrophobe) {
+                if (state.is(hydrophobe.getFluidTag())) {
+                    hydrophobe.clearFluid(level, p);
+                    ci.cancel();
+                    break;
+                }
+            }
+        }
     }
 }
