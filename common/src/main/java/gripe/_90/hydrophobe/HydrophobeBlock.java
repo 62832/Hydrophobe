@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BucketPickup;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.LiquidBlockContainer;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
@@ -63,6 +64,10 @@ public class HydrophobeBlock extends Block {
                     level.setBlock(workingPos, Blocks.AIR.defaultBlockState(), 3);
                 } else if (blockState.getBlock() instanceof BucketPickup liquid) {
                     liquid.pickupBlock(level, workingPos, blockState);
+                } else if (blockState.getBlock() instanceof LiquidBlockContainer) {
+                    // account for underwater plants (kelp, seagrass etc.)
+                    dropResources(blockState, level, workingPos, level.getBlockEntity(workingPos));
+                    level.setBlock(workingPos, Blocks.AIR.defaultBlockState(), 3);
                 }
             }
         });
