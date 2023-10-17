@@ -1,6 +1,5 @@
 package gripe._90.hydrophobe;
 
-import java.util.stream.Stream;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.server.level.ServerLevel;
@@ -52,11 +51,15 @@ public class HydrophobeBlock extends Block {
             var p1 = pos.subtract(new Vec3i(bound, bound, bound));
             var p2 = pos.subtract(new Vec3i(-bound, -bound, -bound));
             BlockPos.betweenClosedStream(p1, p2)
-                    .filter(p -> Stream.of(pos.getX() - p.getX(), pos.getY() - p.getY(), pos.getZ() - p.getZ())
-                            .map(Math::abs)
-                            .anyMatch(i -> i == bound))
-                    .forEach(p -> level.getBlockState(p).neighborChanged(level, p, this, pos, false));
+                    .filter(p -> isOnBoundary(p, pos, bound))
+                    .forEach(p -> level.scheduleTick(p, level.getFluidState(p).getType(), 1));
         }
+    }
+
+    private boolean isOnBoundary(BlockPos point, BlockPos centre, int radius) {
+        return Math.abs(point.getX() - centre.getX()) == radius
+                || Math.abs(point.getY() - centre.getY()) == radius
+                || Math.abs(point.getZ() - centre.getZ()) == radius;
     }
 
     public static void clearFluid(Level level, BlockPos pos) {
