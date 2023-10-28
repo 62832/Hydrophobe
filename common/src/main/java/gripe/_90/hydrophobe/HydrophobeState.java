@@ -65,7 +65,7 @@ public class HydrophobeState extends SavedData {
         var blockPos = BlockPos.of(position);
         var p1 = blockPos.subtract(new Vec3i(range, range, range));
         var p2 = blockPos.subtract(new Vec3i(-range, -range, -range));
-        set.addAll(BlockPos.betweenClosedStream(p1, p2).map(BlockPos::asLong).toList());
+        BlockPos.betweenClosedStream(p1, p2).map(BlockPos::asLong).forEach(set::add);
     }
 
     public static HydrophobeState getOrCreate(ServerLevel level) {

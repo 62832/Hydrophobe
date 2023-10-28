@@ -42,8 +42,6 @@ public class HydrophobeBlock extends Block {
 
     @Override
     public void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
-        super.onRemove(state, level, pos, newState, moved);
-
         if (level instanceof ServerLevel serverLevel) {
             HydrophobeState.getOrCreate(serverLevel).remove(pos.asLong(), fluidTag.equals(Hydrophobe.MAGMAPHOBE_TAG));
 
