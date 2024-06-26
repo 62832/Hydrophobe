@@ -1,0 +1,21 @@
+modLoader = "javafml"
+loaderVersion = "[1,)"
+
+issueTrackerURL = "https://github.com/62832/Hydrophobe/issues"
+displayURL = "https://curseforge.com/minecraft/mc-mods/hydrophobe"
+logoFile = "icon.png"
+authors = "90"
+license = "MIT"
+
+[[mods]]
+modId = "hydrophobe"
+version = "$version"
+displayName = "Hydrophobe"
+description = "An active water repellent."
+
+[[mixins]]
+config = "hydrophobe.mixins.json"
+
+[[dependencies]]
+modId = "neoforge"
+versionRange = "[21,)"

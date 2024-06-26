@@ -2,7 +2,9 @@ package gripe._90.hydrophobe;
 
 import it.unimi.dsi.fastutil.longs.LongOpenHashSet;
 import it.unimi.dsi.fastutil.longs.LongSet;
+import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Vec3i;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -20,7 +22,7 @@ public class HydrophobeState extends SavedData {
 
     @NotNull
     @Override
-    public CompoundTag save(CompoundTag nbt) {
+    public CompoundTag save(CompoundTag nbt, @NotNull HolderLookup.Provider registries) {
         nbt.putLongArray("hydrophobePositions", hydrophobePositions.toLongArray());
         nbt.putLongArray("magmaphobePositions", magmaphobePositions.toLongArray());
         nbt.putLongArray("inHydrophobeRange", inHydrophobeRange.toLongArray());
@@ -43,7 +45,7 @@ public class HydrophobeState extends SavedData {
         addInRange(
                 pos,
                 magmaphobe ? inMagmaphobeRange : inHydrophobeRange,
-                magmaphobe ? Hydrophobe.MAGMAPHOBE_RANGE : Hydrophobe.HYDROPHOBE_RANGE);
+                magmaphobe ? Hydrophobe.MAGMAPHOBE_RANGE.getAsInt() : Hydrophobe.HYDROPHOBE_RANGE.getAsInt());
         setDirty();
     }
 
@@ -52,16 +54,16 @@ public class HydrophobeState extends SavedData {
 
         if (magmaphobe) {
             inMagmaphobeRange.clear();
-            magmaphobePositions.forEach(p -> addInRange(p, inMagmaphobeRange, Hydrophobe.MAGMAPHOBE_RANGE));
+            magmaphobePositions.forEach(p -> addInRange(p, inMagmaphobeRange, Hydrophobe.MAGMAPHOBE_RANGE.getAsInt()));
         } else {
             inHydrophobeRange.clear();
-            hydrophobePositions.forEach(p -> addInRange(p, inHydrophobeRange, Hydrophobe.HYDROPHOBE_RANGE));
+            hydrophobePositions.forEach(p -> addInRange(p, inHydrophobeRange, Hydrophobe.HYDROPHOBE_RANGE.getAsInt()));
         }
 
         setDirty();
     }
 
-    private void addInRange(long position, LongSet set, int range) {
+    private void addInRange(long position, Set<Long> set, int range) {
         var blockPos = BlockPos.of(position);
         var p1 = blockPos.subtract(new Vec3i(range, range, range));
         var p2 = blockPos.subtract(new Vec3i(-range, -range, -range));
@@ -69,10 +71,11 @@ public class HydrophobeState extends SavedData {
     }
 
     public static HydrophobeState getOrCreate(ServerLevel level) {
-        return level.getDataStorage().computeIfAbsent(HydrophobeState::load, HydrophobeState::new, Hydrophobe.MODID);
+        return level.getDataStorage()
+                .computeIfAbsent(new Factory<>(HydrophobeState::new, HydrophobeState::load), Hydrophobe.MODID);
     }
 
-    private static HydrophobeState load(CompoundTag tag) {
+    private static HydrophobeState load(CompoundTag tag, HolderLookup.Provider registries) {
         var state = new HydrophobeState();
 
         for (var position : tag.getLongArray("hydrophobePositions")) {
